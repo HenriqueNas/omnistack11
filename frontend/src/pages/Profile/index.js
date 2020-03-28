@@ -53,7 +53,7 @@ export default function Profile() {
     <div className="profile-container">
       <header>
         <img src={logo} alt="Be The Hero" />
-        <span>Bem Vinda APAD</span>
+        <span>Bem Vinda {ongName}</span>
 
         <Link to="/incidents/new" className="button">
           {" "}
