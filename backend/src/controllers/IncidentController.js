@@ -40,19 +40,16 @@ module.exports = {
   async delete(request, response) {
     const { id } = request.params;
     const ong_id = request.headers.auth;
-    const incident = null;
-    try {
-      const incident = await conn("incidents")
-        .where("id", id)
-        .select("ong_id")
-        .first();
-    } finally {
-      if (incident == null) {
-        return response.status(404).json({
-          error: "INCIDENT_NOT_FOUND",
-          message: "id=" + id + "."
-        });
-      }
+    const incident = conn("incidents")
+      .where("id", id)
+      .select("ong_id")
+      .first();
+
+    if (incident == null) {
+      return response.status(404).json({
+        error: "INCIDENT_NOT_FOUND",
+        message: "id=" + id + "."
+      });
     }
 
     if (incident.ong_id !== ong_id) {
